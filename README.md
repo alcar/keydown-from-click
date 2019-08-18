@@ -135,7 +135,7 @@ const Component = () => {
 
 ## Example
 
-[CodeSandbox](https://codesandbox.io/s/github/alcar/keydown-from-click)
+[CodeSandbox](https://codesandbox.io/s/keydown-from-click-example-rwsxk)
 
 ## Changelog
 

@@ -2,7 +2,9 @@ import { FireFunction } from '@testing-library/react'
 
 import { Modifier, Modifiers } from '../typings'
 
-export type MockedEvent = { key: KeyboardEvent['key'] }
+export type MockedEvent = {
+  key: KeyboardEvent['key']
+}
 
 export type MockedEventWithModifiers = MockedEvent & Modifiers
 

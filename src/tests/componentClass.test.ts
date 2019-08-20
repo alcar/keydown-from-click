@@ -1,4 +1,4 @@
 import { ComponentClass } from './__fixtures__/ComponentClass'
-import { test } from './utils'
+import { runGeneralTests } from './utils'
 
-test('createKeydownFromClick', ComponentClass)
+runGeneralTests('createKeydownFromClick', ComponentClass)

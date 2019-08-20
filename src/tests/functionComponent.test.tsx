@@ -5,11 +5,11 @@ import * as createKeydownFromClickModule from '../api/createKeydownFromClick'
 import { KeydownHandlerCreator } from '../typings'
 
 import { FunctionComponent } from './__fixtures__/FunctionComponent'
-import { DATA_TESTID, createTestHelpers, test } from './utils'
+import { DATA_TESTID, createTestHelpers, runGeneralTests } from './utils'
 
-test('useKeydownFromClick: general tests', FunctionComponent)
+runGeneralTests('useKeydownFromClick: general tests', FunctionComponent)
 
-describe('useKeydownFromClick: hook tests', () => {
+describe("useKeydownFromClick: hooks' inner workings", () => {
   const { onClick, pressEnter } = createTestHelpers()
 
   let spiedCreateKeydownFromClick: jest.MockInstance<
@@ -17,7 +17,7 @@ describe('useKeydownFromClick: hook tests', () => {
     Parameters<KeydownHandlerCreator>
   >
 
-  beforeEach(() => {
+  beforeAll(() => {
     spiedCreateKeydownFromClick = jest.spyOn(
       createKeydownFromClickModule,
       'createKeydownFromClick',
@@ -25,7 +25,7 @@ describe('useKeydownFromClick: hook tests', () => {
   })
 
   afterEach(() => {
-    spiedCreateKeydownFromClick.mockRestore()
+    spiedCreateKeydownFromClick.mockClear()
 
     onClick.mockClear()
   })

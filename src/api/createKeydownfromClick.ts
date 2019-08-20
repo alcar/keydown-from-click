@@ -17,16 +17,29 @@ export const createKeydownFromClick: KeydownHandlerCreator = (
 
   const keydownHandler = (event: React.KeyboardEvent): void => {
     if (shouldTriggerHandler(keyModifierCombos, event)) {
-    clickHandler({
-      altKey: event.altKey,
-      ctrlKey: event.ctrlKey,
-      currentTarget: event.currentTarget,
-      metaKey: event.metaKey,
-      shiftKey: event.shiftKey,
-      target: event.target,
-    })
+      clickHandler({
+        altKey: event.altKey,
+        bubbles: event.bubbles,
+        cancelable: event.cancelable,
+        ctrlKey: event.ctrlKey,
+        currentTarget: event.currentTarget,
+        defaultPrevented: event.defaultPrevented,
+        eventPhase: event.eventPhase,
+        isDefaultPrevented: event.isDefaultPrevented,
+        isPropagationStopped: event.isPropagationStopped,
+        isTrusted: event.isTrusted,
+        metaKey: event.metaKey,
+        nativeEvent: event.nativeEvent,
+        persist: event.persist,
+        preventDefault: event.preventDefault,
+        shiftKey: event.shiftKey,
+        stopPropagation: event.stopPropagation,
+        target: event.target,
+        timeStamp: event.timeStamp,
+        type: event.type,
+      })
+    }
   }
-}
 
   return keydownHandler
 }

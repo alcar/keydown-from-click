@@ -9,12 +9,9 @@ export type Modifiers = {
 
 export type Modifier = keyof Modifiers
 
-type PartialEvent = Pick<
-  React.MouseEvent,
-  Modifier | 'currentTarget' | 'target'
->
+type FullEvent<T = Element> = Modifiers & React.SyntheticEvent<T>
 
-type PartialEventHandler = (partialEvent: PartialEvent) => void
+type FullEventHandler<T = Element> = (FullEvent: FullEvent<T>) => void
 
 export type Options = {
   keys?: string[]
@@ -25,15 +22,15 @@ export type HookOptions = {
   extraDependencies?: unknown[]
 }
 
-export type KeydownHandlerCreator = (
-  clickHandler: PartialEventHandler,
+export type KeydownHandlerCreator<T = Element> = (
+  clickHandler: FullEventHandler<T>,
   options?: Options,
 ) => React.KeyboardEventHandler
 
 export const createKeydownFromClick: KeydownHandlerCreator
 
-export type KeydownHandlerCreatorHook = (
-  clickHandler: PartialEventHandler,
+export type KeydownHandlerCreatorHook<T = Element> = (
+  clickHandler: FullEventHandler<T>,
   options?: Options & HookOptions,
 ) => React.KeyboardEventHandler
 

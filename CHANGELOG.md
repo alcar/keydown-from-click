@@ -7,6 +7,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- Support to inline modifiers;
+- Pass `React.SyntheticEvent`'s properties to the click handler when the keydown handler is triggered.
+
+### Changed
+
+- Optimize functions by moving some steps out of the keydown handler.
+
 ## [1.0.1] - 2019-08-17
 
 ### Changed

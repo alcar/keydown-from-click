@@ -1,8 +1,8 @@
 import React from 'react'
 
-import { Options, HookOptions } from '../typings'
-import { useKeydownFromClick } from '../useKeydownFromClick'
-import { DATA_TESTID } from '../utils/test'
+import { useKeydownFromClick } from '../../api/useKeydownFromClick'
+import { Options, HookOptions } from '../../typings'
+import { DATA_TESTID } from '../utils'
 
 export type FunctionComponentProps = {
   onClick: () => void

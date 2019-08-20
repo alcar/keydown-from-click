@@ -8,7 +8,7 @@
 
 - [Motivation](#motivation)
 - [Installation](#installation)
-- [Functions](#functions)
+- [API](#api)
 - [Example](#example)
 - [Changelog](#changelog)
 - [Development](#development)
@@ -28,7 +28,7 @@ However, oftentimes the keyboard handler should just replicate the click handler
 npm install keydown-from-click
 ```
 
-## Functions
+## API
 
 _To get a better grasp of each function's behavior, please check their individual test suites._
 
@@ -64,7 +64,7 @@ const keydownHandler = createKeydownFromClick(clickHandler)
 
 - `modifiers`
 
-  An object containing the "modifier" keys (Alt, Ctrl, Meta, Shift) that should be pressed and held down while pressing Enter – or any of the keys from the `keys` option.
+  An object containing the modifier keys (`altKey`, `ctrlKey`, `metaKey`, `shiftKey`) that should be pressed and held down while pressing Enter – or any of the keys from the `keys` option.
 
   ```js
   const options = {
@@ -72,6 +72,28 @@ const keydownHandler = createKeydownFromClick(clickHandler)
       altKey: true,
       shiftKey: true,
     },
+  }
+  ```
+
+  The `modifiers` option is applied to all keys, but can be shadowed by inline modifiers (`alt`, `ctrl`, `meta`, `shift`); to do so, just prefix them to your keys along with a plus sign (`+`).
+
+  ```js
+  const options = {
+    keys: ['shift + a', 'b'],
+    modifiers: {
+      altKey: true,
+      shiftKey: false,
+    },
+  }
+
+  // Detects (Alt + Shift + 'a') and (Alt + 'b')
+  ```
+
+  Also, multiple inline modifiers may be assigned to a single key.
+
+  ```js
+  const options = {
+    keys: ['alt + shift + a', 'alt + ctrl + b', 'meta + shift + c'],
   }
   ```
 
@@ -96,6 +118,8 @@ const Component = () => {
 
 #### Options
 
+_All options from `createKeydownFromClick` are also available to `useKeydownFromClick`._
+
 - `extraDependencies`
 
   An array containing the dependencies that should cause React's `useMemo` to recompute the memoized keydown handler.
@@ -105,31 +129,6 @@ const Component = () => {
   ```js
   const options = {
     extraDependencies: [someVar, someOtherVar],
-  }
-  ```
-
-- `keys`
-
-  An array containing the keys (`DOMString`s) that should trigger `clickHandler`.
-
-  Using this option overrides the default configuration (`['Enter']`).
-
-  ```js
-  const options = {
-    keys: ['a', 'b', 'c'],
-  }
-  ```
-
-- `modifiers`
-
-  An object containing the "modifier" keys (Alt, Ctrl, Meta, Shift) that should be pressed and held down while pressing Enter – or any of the keys from the `keys` option.
-
-  ```js
-  const options = {
-    modifiers: {
-      altKey: true,
-      shiftKey: true,
-    },
   }
   ```
 

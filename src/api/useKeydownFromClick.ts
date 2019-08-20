@@ -1,7 +1,8 @@
 import React from 'react'
 
-import { createKeydownFromClick } from '../createKeydownFromClick'
 import { KeydownHandlerCreatorHook } from '../typings'
+
+import { createKeydownFromClick } from './createKeydownFromClick'
 
 export const useKeydownFromClick: KeydownHandlerCreatorHook = (
   clickHandler,

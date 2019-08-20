@@ -1,10 +1,11 @@
 import { fireEvent, render } from '@testing-library/react'
 import React from 'react'
 
-import { ComponentClassProps } from '../../__fixtures__/ComponentClass'
-import { FunctionComponentProps } from '../../__fixtures__/FunctionComponent'
-import * as createKeydownFromClickModule from '../../createKeydownFromClick'
-import { KeydownHandlerCreator, Modifier } from '../../typings'
+import * as createKeydownFromClickModule from '../api/createKeydownFromClick'
+import { KeydownHandlerCreator, Modifier } from '../typings'
+
+import { ComponentClassProps } from './__fixtures__/ComponentClass'
+import { FunctionComponentProps } from './__fixtures__/FunctionComponent'
 
 import {
   MockedEvent,

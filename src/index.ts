@@ -1,5 +1,5 @@
-import { createKeydownFromClick as creator } from './createKeydownFromClick'
-import { useKeydownFromClick as hook } from './useKeydownFromClick'
+import { createKeydownFromClick as creator } from './api/createKeydownFromClick'
+import { useKeydownFromClick as hook } from './api/useKeydownFromClick'
 
 export const createKeydownFromClick = creator
 export const useKeydownFromClick = hook

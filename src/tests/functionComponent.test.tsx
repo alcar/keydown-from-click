@@ -1,10 +1,11 @@
 import { render } from '@testing-library/react'
 import React from 'react'
 
-import { FunctionComponent } from '../__fixtures__/FunctionComponent'
-import * as createKeydownFromClickModule from '../createKeydownFromClick'
+import * as createKeydownFromClickModule from '../api/createKeydownFromClick'
 import { KeydownHandlerCreator } from '../typings'
-import { DATA_TESTID, createTestHelpers, test } from '../utils/test'
+
+import { FunctionComponent } from './__fixtures__/FunctionComponent'
+import { DATA_TESTID, createTestHelpers, test } from './utils'
 
 test('useKeydownFromClick: general tests', FunctionComponent)
 

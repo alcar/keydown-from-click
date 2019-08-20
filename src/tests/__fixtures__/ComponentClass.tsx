@@ -1,8 +1,8 @@
 import React from 'react'
 
-import { createKeydownFromClick } from '../createKeydownFromClick'
-import { Options, PartialEventHandler } from '../typings'
-import { DATA_TESTID } from '../utils/test'
+import { createKeydownFromClick } from '../../api/createKeydownFromClick'
+import { Options, PartialEventHandler } from '../../typings'
+import { DATA_TESTID } from '../utils'
 
 export type ComponentClassProps = {
   onClick: PartialEventHandler

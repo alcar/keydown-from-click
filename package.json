@@ -6,9 +6,11 @@
   "typings": "src/typings.d.ts",
   "scripts": {
     "build": "webpack",
-    "prepublishOnly": "npm run typecheck && npm run test && npm run build",
-    "test": "jest",
-    "typecheck": "tsc"
+    "checkTypes": "tsc",
+    "format": "prettier -l './**/*.+(json|md|ts|tsx)'",
+    "lint": "eslint -c .eslintrc.js ./ --ext ts,tsx --max-warnings=0",
+    "prepublishOnly": "npm run checkTypes && npm run test && npm run lint && npm run format && npm run build",
+    "test": "jest"
   },
   "repository": {
     "type": "git",

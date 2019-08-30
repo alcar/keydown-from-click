@@ -7,6 +7,23 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- `release`, `prereleasy` and `postreleasy` scripts;
+- Subsection on releasing and publishing to README;
+- "Watch mode" to the README's subsection on testing;
+- `_releasy.json`.
+
+### Changed
+
+- Make Travis CI run most scripts in parallel;
+- Rename `checkTypes` script to `checkTyping`;
+- Rename `format` script to `checkFormatting`.
+
+### Removed
+
+- `prepublishOnly` script.
+
 ## [1.1.4] - 2019-08-30
 
 ### Added
@@ -16,7 +33,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
-- README's subsection about type checking.
+- README's subsection on type checking.
 
 ## [1.1.3] - 2019-08-29
 

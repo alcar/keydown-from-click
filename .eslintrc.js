@@ -33,4 +33,9 @@ module.exports = {
     'react-hooks/exhaustive-deps': 'warn',
     'react-hooks/rules-of-hooks': 'error',
   },
+  settings: {
+    react: {
+      version: 'detect',
+    },
+  },
 }

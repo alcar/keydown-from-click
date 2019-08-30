@@ -148,10 +148,10 @@ All releases are documented in the project's [changelog](/CHANGELOG.md).
 npm run build
 ```
 
-### Formatting
+### Format checking
 
 ```
-npm run format
+npm run checkFormatting
 ```
 
 ### Linting
@@ -197,7 +197,7 @@ npm run test --watch
 ### Type checking
 
 ```
-npm run checkTypes
+npm run checkTyping
 ```
 
 ## License

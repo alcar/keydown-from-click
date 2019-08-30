@@ -6,11 +6,11 @@
   "typings": "src/typings.d.ts",
   "scripts": {
     "build": "webpack",
-    "checkTypes": "tsc",
-    "format": "prettier -l './**/*.+(json|md|ts|tsx)'",
+    "checkFormatting": "prettier -l './**/*.+(json|md|ts|tsx)'",
+    "checkTyping": "tsc",
     "lint": "eslint -c .eslintrc.js ./ --ext ts,tsx --max-warnings=0",
     "postreleasy": "npm publish",
-    "prereleasy": "npm-run-all -p checkTypes test lint format -s build",
+    "prereleasy": "npm-run-all -p checkFormatting checkTyping lint test -s build",
     "release": "releasy",
     "test": "jest"
   },

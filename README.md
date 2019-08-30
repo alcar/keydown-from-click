@@ -160,6 +160,26 @@ npm run format
 npm run lint
 ```
 
+### Releasing (and publishing)
+
+#### Patches
+
+```
+npm run release
+```
+
+#### Minors
+
+```
+npm run release minor
+```
+
+#### Majors
+
+```
+npm run release major
+```
+
 ### Testing
 
 ```

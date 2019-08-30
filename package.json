@@ -16,6 +16,17 @@
     "type": "git",
     "url": "git+https://github.com/alcar/keydown-from-click.git"
   },
+  "keywords": [
+    "a11y",
+    "accessibility",
+    "click",
+    "event",
+    "handler",
+    "hook",
+    "key",
+    "keydown",
+    "react"
+  ],
   "author": "Alan Carpilovsky",
   "license": "MIT",
   "bugs": {

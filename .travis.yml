@@ -8,4 +8,4 @@ branches:
   except:
     - wip
 
-script: yarn prepublishOnly
+script: yarn prereleasy

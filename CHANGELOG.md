@@ -7,6 +7,28 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- JSON files now also get formatted during pre-commit;
+- `format` and `lint` scripts;
+- The pre-publish process now also lints all files and checks if they're properly formatted;
+- Travis CI now also lints all files, and checks if they're properly formatted and the project is built without errors;
+- React version setting to the ESLint configuration;
+- `.prettierignore`.
+
+### Changed
+
+- Rename `typecheck` script to `checkTypes`.
+
+### Removed
+
+- Travis CI notification emails;
+- Automatic Travis CI builds for the `wip` branch.
+
+### Security
+
+- Upgrade `eslint-utils`, since the previous version had a security vulnerability.
+
 ## [1.1.1] - 2019-08-20
 
 ### Fixed

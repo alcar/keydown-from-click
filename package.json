@@ -1,6 +1,6 @@
 {
   "name": "keydown-from-click",
-  "version": "1.1.5",
+  "version": "1.1.6",
   "description": "Generate keydown handlers by replicating click ones",
   "main": "build/index.js",
   "typings": "src/typings.d.ts",

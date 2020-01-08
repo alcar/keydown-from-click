@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Security
+
+- Upgrade "handlebars" and "serialize-javascript", and all other upgradable packages.
+
 ## [1.1.5] - 2019-08-30
 
 ### Added

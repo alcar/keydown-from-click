@@ -7,7 +7,7 @@ import { KeydownHandlerCreator } from '../typings'
 import { FunctionComponent } from './__fixtures__/FunctionComponent'
 import { DATA_TESTID, createTestHelpers, runGeneralTests } from './utils'
 
-runGeneralTests('useKeydownFromClick: general tests', FunctionComponent)
+runGeneralTests('useKeydownFromClick', FunctionComponent)
 
 describe("useKeydownFromClick: hooks' inner workings", () => {
   const { onClick, pressEnter } = createTestHelpers()

@@ -58,6 +58,7 @@ export const runGeneralTests = (
     | React.ComponentClass<ComponentClassProps>
     | React.FC<FunctionComponentProps>,
 ): void => {
+  // eslint-disable-next-line jest/valid-describe
   describe(`${suiteName}: general`, () => {
     const { onClick, pressEnter } = createTestHelpers()
 
@@ -79,7 +80,9 @@ export const runGeneralTests = (
 
       spiedConsoleWarn = jest
         .spyOn(consoleModule, 'warn')
-        .mockImplementation(() => {})
+        .mockImplementation(() => {
+          return
+        })
     })
 
     afterEach(() => {

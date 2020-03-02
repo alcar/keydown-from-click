@@ -1,12 +1,12 @@
 import React from 'react'
 
-import { KeydownHandlerCreator } from '../typings'
+import { FullEventHandler, Options } from '../typings'
 import { combineKeysWithModifiers, shouldTriggerHandler } from '../utils/event'
 
-export const createKeydownFromClick: KeydownHandlerCreator = (
-  clickHandler,
-  options = {},
-) => {
+export const createKeydownFromClick = <T extends HTMLElement = HTMLElement>(
+  clickHandler: FullEventHandler<T>,
+  options: Options = {},
+): React.KeyboardEventHandler<T> => {
   const { keys: optionsKeys, modifiers: globalModifiers = {} } = options
 
   const keys = optionsKeys
@@ -15,7 +15,7 @@ export const createKeydownFromClick: KeydownHandlerCreator = (
 
   const keyModifierCombos = combineKeysWithModifiers(keys, globalModifiers)
 
-  const keydownHandler = (event: React.KeyboardEvent): void => {
+  return (event: React.KeyboardEvent<T>): void => {
     if (shouldTriggerHandler(keyModifierCombos, event)) {
       clickHandler({
         altKey: event.altKey,
@@ -40,6 +40,4 @@ export const createKeydownFromClick: KeydownHandlerCreator = (
       })
     }
   }
-
-  return keydownHandler
 }

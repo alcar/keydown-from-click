@@ -1,8 +1,7 @@
 import { fireEvent, render } from '@testing-library/react'
 import React from 'react'
 
-import * as createKeydownFromClickModule from '../api/createKeydownFromClick'
-import { KeydownHandlerCreator, Modifier } from '../typings'
+import { Modifier } from '../typings'
 import * as consoleModule from '../utils/console'
 import * as eventUtilsModule from '../utils/event'
 
@@ -62,22 +61,12 @@ export const runGeneralTests = (
   describe(`${suiteName}: general`, () => {
     const { onClick, pressEnter } = createTestHelpers()
 
-    let spiedCreateKeydownHandler: jest.MockInstance<
-      ReturnType<KeydownHandlerCreator>,
-      Parameters<KeydownHandlerCreator>
-    >
-
     let spiedConsoleWarn: jest.MockInstance<
       ReturnType<Console['warn']>,
       Parameters<Console['warn']>
     >
 
     beforeAll(() => {
-      spiedCreateKeydownHandler = jest.spyOn(
-        createKeydownFromClickModule,
-        'createKeydownFromClick',
-      )
-
       spiedConsoleWarn = jest
         .spyOn(consoleModule, 'warn')
         .mockImplementation(() => {
@@ -86,8 +75,6 @@ export const runGeneralTests = (
     })
 
     afterEach(() => {
-      spiedCreateKeydownHandler.mockClear()
-
       spiedConsoleWarn.mockClear()
 
       onClick.mockClear()

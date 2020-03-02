@@ -1,13 +1,13 @@
 import React from 'react'
 
-import { KeydownHandlerCreatorHook } from '../typings'
+import { FullEventHandler, HookOptions, Options } from '../typings'
 
 import { createKeydownFromClick } from './createKeydownFromClick'
 
-export const useKeydownFromClick: KeydownHandlerCreatorHook = (
-  clickHandler,
-  options = {},
-) => {
+export const useKeydownFromClick = <T extends HTMLElement = HTMLElement>(
+  clickHandler: FullEventHandler<T>,
+  options: Options & HookOptions = {},
+): React.KeyboardEventHandler<T> => {
   const { extraDependencies, keys, modifiers } = options
 
   const keydownHandler = React.useMemo(
@@ -18,8 +18,5 @@ export const useKeydownFromClick: KeydownHandlerCreatorHook = (
       : [clickHandler, keys, modifiers],
   )
 
-  return React.useCallback(
-    (event: React.KeyboardEvent) => keydownHandler(event),
-    [keydownHandler],
-  )
+  return React.useCallback(event => keydownHandler(event), [keydownHandler])
 }

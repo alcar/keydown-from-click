@@ -9,9 +9,12 @@ export type Modifiers = {
 
 export type Modifier = keyof Modifiers
 
-type FullEvent<T = Element> = Modifiers & React.SyntheticEvent<T>
+type FullEvent<T extends HTMLElement = HTMLElement> = Modifiers &
+  React.SyntheticEvent<T>
 
-type FullEventHandler<T = Element> = (FullEvent: FullEvent<T>) => void
+export type FullEventHandler<T extends HTMLElement = HTMLElement> = (
+  FullEvent: FullEvent<T>,
+) => void
 
 export type Options = {
   keys?: string[]
@@ -22,16 +25,6 @@ export type HookOptions = {
   extraDependencies?: unknown[]
 }
 
-export type KeydownHandlerCreator<T = Element> = (
-  clickHandler: FullEventHandler<T>,
-  options?: Options,
-) => React.KeyboardEventHandler
+export { createKeydownFromClick } from './api/createKeydownFromClick'
 
-export const createKeydownFromClick: KeydownHandlerCreator
-
-export type KeydownHandlerCreatorHook<T = Element> = (
-  clickHandler: FullEventHandler<T>,
-  options?: Options & HookOptions,
-) => React.KeyboardEventHandler
-
-export const useKeydownFromClick: KeydownHandlerCreatorHook
+export { useKeydownFromClick } from './api/useKeydownFromClick'

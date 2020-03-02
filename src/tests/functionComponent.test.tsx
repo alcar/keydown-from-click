@@ -2,7 +2,6 @@ import { render } from '@testing-library/react'
 import React from 'react'
 
 import * as createKeydownFromClickModule from '../api/createKeydownFromClick'
-import { KeydownHandlerCreator } from '../typings'
 
 import { FunctionComponent } from './__fixtures__/FunctionComponent'
 import { DATA_TESTID, createTestHelpers, runGeneralTests } from './utils'
@@ -13,8 +12,8 @@ describe("useKeydownFromClick: hooks' inner workings", () => {
   const { onClick, pressEnter } = createTestHelpers()
 
   let spiedCreateKeydownFromClick: jest.MockInstance<
-    ReturnType<KeydownHandlerCreator>,
-    Parameters<KeydownHandlerCreator>
+    ReturnType<typeof createKeydownFromClickModule.createKeydownFromClick>,
+    Parameters<typeof createKeydownFromClickModule.createKeydownFromClick>
   >
 
   beforeAll(() => {

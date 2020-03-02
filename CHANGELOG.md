@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+
+- API functions' types, which were not behaving as generic ones.
+
 ## [1.1.6] - 2020-01-08
 
 ### Security

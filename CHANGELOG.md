@@ -7,6 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+- **[BREAKING]** Replace `FullEventHandler` with the event handlers from React for seamless integration, and make the necessary changes to the click handler call.
+
+### Removed
+
+- **[BREAKING]** `FullEventHandler` type.
+
 ## [1.1.8] - 2020-03-06
 
 ### Fixed

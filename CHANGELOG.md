@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+
+- Use the same generic type from `useKeydownFromClick` in `createKeydownFromClick`.
+
 ## [1.1.7] - 2020-03-02
 
 ### Fixed

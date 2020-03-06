@@ -1,11 +1,11 @@
 import React from 'react'
 
-import { FullEventHandler, HookOptions, Options } from '../typings'
+import { HookOptions, Options } from '../typings'
 
 import { createKeydownFromClick } from './createKeydownFromClick'
 
 export const useKeydownFromClick = <T extends HTMLElement = HTMLElement>(
-  clickHandler: FullEventHandler<T>,
+  clickHandler: React.MouseEventHandler<T>,
   options: Options & HookOptions = {},
 ): React.KeyboardEventHandler<T> => {
   const { extraDependencies, keys, modifiers } = options

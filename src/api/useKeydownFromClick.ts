@@ -11,8 +11,8 @@ export const useKeydownFromClick = <T extends HTMLElement = HTMLElement>(
   const { extraDependencies, keys, modifiers } = options
 
   const keydownHandler = React.useMemo(
-    () => createKeydownFromClick(clickHandler, { keys, modifiers }),
-    //eslint-disable-next-line react-hooks/exhaustive-deps
+    () => createKeydownFromClick<T>(clickHandler, { keys, modifiers }),
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     extraDependencies
       ? [clickHandler, keys, modifiers, ...extraDependencies]
       : [clickHandler, keys, modifiers],

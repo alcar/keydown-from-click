@@ -1,16 +1,16 @@
 import React from 'react'
 
 import { createKeydownFromClick } from '../../api/createKeydownFromClick'
-import { Options, FullEventHandler } from '../../typings'
+import { Options } from '../../typings'
 import { DATA_TESTID } from '../utils'
 
 export type ComponentClassProps = {
-  onClick: FullEventHandler
+  onClick: React.MouseEventHandler
   options?: Options
 }
 
 export class ComponentClass extends React.Component<ComponentClassProps> {
-  private handleClick: FullEventHandler
+  private handleClick: React.MouseEventHandler
   private handleKeyDown: React.KeyboardEventHandler
 
   public constructor(props: ComponentClassProps) {

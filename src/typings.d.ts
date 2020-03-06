@@ -1,5 +1,3 @@
-import React from 'react'
-
 export type Modifiers = {
   altKey?: boolean
   ctrlKey?: boolean
@@ -8,13 +6,6 @@ export type Modifiers = {
 }
 
 export type Modifier = keyof Modifiers
-
-type FullEvent<T extends HTMLElement = HTMLElement> = Modifiers &
-  React.SyntheticEvent<T>
-
-export type FullEventHandler<T extends HTMLElement = HTMLElement> = (
-  FullEvent: FullEvent<T>,
-) => void
 
 export type Options = {
   keys?: string[]

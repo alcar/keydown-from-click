@@ -1,10 +1,10 @@
 import React from 'react'
 
-import { FullEventHandler, Options } from '../typings'
+import { Options } from '../typings'
 import { combineKeysWithModifiers, shouldTriggerHandler } from '../utils/event'
 
 export const createKeydownFromClick = <T extends HTMLElement = HTMLElement>(
-  clickHandler: FullEventHandler<T>,
+  clickHandler: React.MouseEventHandler<T>,
   options: Options = {},
 ): React.KeyboardEventHandler<T> => {
   const { keys: optionsKeys, modifiers: globalModifiers = {} } = options
@@ -18,6 +18,7 @@ export const createKeydownFromClick = <T extends HTMLElement = HTMLElement>(
   return (event: React.KeyboardEvent<T>): void => {
     if (shouldTriggerHandler(keyModifierCombos, event)) {
       clickHandler({
+        // Available properties and methods
         altKey: event.altKey,
         bubbles: event.bubbles,
         cancelable: event.cancelable,
@@ -29,7 +30,6 @@ export const createKeydownFromClick = <T extends HTMLElement = HTMLElement>(
         isPropagationStopped: event.isPropagationStopped,
         isTrusted: event.isTrusted,
         metaKey: event.metaKey,
-        nativeEvent: event.nativeEvent,
         persist: event.persist,
         preventDefault: event.preventDefault,
         shiftKey: event.shiftKey,
@@ -37,6 +37,21 @@ export const createKeydownFromClick = <T extends HTMLElement = HTMLElement>(
         target: event.target,
         timeStamp: event.timeStamp,
         type: event.type,
+
+        // Other properties and methods, added mostly for typing consistency
+        button: 0,
+        buttons: 1,
+        clientX: 0,
+        clientY: 0,
+        getModifierState: () => false,
+        movementX: 0,
+        movementY: 0,
+        nativeEvent: new MouseEvent('click'),
+        pageX: 0,
+        pageY: 0,
+        relatedTarget: null,
+        screenX: 0,
+        screenY: 0,
       })
     }
   }

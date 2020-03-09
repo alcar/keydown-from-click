@@ -97,6 +97,18 @@ const keydownHandler = createKeydownFromClick(clickHandler)
   }
   ```
 
+- `shouldPropagate`
+
+  A boolean that controls whether the event should propagate; it defaults to `true`.
+
+  ```js
+  const options = {
+    shouldPropagate: false,
+  }
+
+  // Stops event propagation
+  ```
+
 ### `useKeydownFromClick(clickHandler[, options])`
 
 The hook version of `createKeydownFromClick`.

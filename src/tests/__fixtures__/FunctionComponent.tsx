@@ -13,17 +13,13 @@ export const FunctionComponent: React.FC<FunctionComponentProps> = ({
   onClick,
   options,
 }) => {
-  const handleClick = React.useCallback(onClick, [])
-
-  const handleKeyDown = useKeydownFromClick(handleClick, options)
+  const handleKeyDown = useKeydownFromClick(onClick, options)
 
   return (
-    <div
+    <button
       data-testid={DATA_TEST_ID}
-      onClick={handleClick}
+      onClick={onClick}
       onKeyDown={handleKeyDown}
-      role="button"
-      tabIndex={0}
     />
   )
 }

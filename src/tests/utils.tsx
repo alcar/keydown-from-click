@@ -1,13 +1,13 @@
 import { fireEvent, render } from '@testing-library/react'
 import React from 'react'
 
+import { createKeydownFromClick } from '../index'
 import { Modifier } from '../typings'
 import * as consoleModule from '../utils/console'
 import * as eventUtilsModule from '../utils/event'
 
 import { ComponentClassProps } from './__fixtures__/ComponentClass'
 import { FunctionComponentProps } from './__fixtures__/FunctionComponent'
-
 import {
   MockedEvent,
   MockedEventWithModifiers,
@@ -15,7 +15,7 @@ import {
   TestHelpers,
 } from './typings'
 
-export const DATA_TESTID = 'component'
+export const DATA_TEST_ID = 'component'
 
 const KEYDOWN_EVENTS: MockedEvents = {
   a: { key: 'a' },
@@ -48,7 +48,7 @@ export const createTestHelpers = (): TestHelpers => {
 const getRenderedComponent = (component: React.ReactElement): HTMLElement => {
   const { getByTestId } = render(component)
 
-  return getByTestId(DATA_TESTID)
+  return getByTestId(DATA_TEST_ID)
 }
 
 export const runGeneralTests = (
@@ -519,6 +519,56 @@ export const runGeneralTests = (
       pressEnter(component)
 
       expect(onClick).toHaveBeenCalledTimes(1)
+    })
+
+    it('propagates the event by default', () => {
+      const parentClickHandlerMock = jest.fn()
+
+      const parentKeyDownHandler = createKeydownFromClick(
+        parentClickHandlerMock,
+      )
+
+      const childComponent = getRenderedComponent(
+        <div
+          onClick={parentClickHandlerMock}
+          onKeyDown={parentKeyDownHandler}
+          role="button"
+          tabIndex={0}
+        >
+          <Component onClick={onClick} />
+        </div>,
+      )
+
+      expect(parentClickHandlerMock).toHaveBeenCalledTimes(0)
+
+      pressEnter(childComponent)
+
+      expect(parentClickHandlerMock).toHaveBeenCalledTimes(1)
+    })
+
+    it('does not propagate the event when shouldPropagate is false', () => {
+      const parentClickHandlerMock = jest.fn()
+
+      const parentKeyDownHandler = createKeydownFromClick(
+        parentClickHandlerMock,
+      )
+
+      const childComponent = getRenderedComponent(
+        <div
+          onClick={parentClickHandlerMock}
+          onKeyDown={parentKeyDownHandler}
+          role="button"
+          tabIndex={0}
+        >
+          <Component onClick={onClick} options={{ shouldPropagate: false }} />
+        </div>,
+      )
+
+      expect(parentClickHandlerMock).toHaveBeenCalledTimes(0)
+
+      pressEnter(childComponent)
+
+      expect(parentClickHandlerMock).toHaveBeenCalledTimes(0)
     })
   })
 }

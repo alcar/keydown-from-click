@@ -4,7 +4,7 @@ import React from 'react'
 import * as createKeydownFromClickModule from '../api/createKeydownFromClick'
 
 import { FunctionComponent } from './__fixtures__/FunctionComponent'
-import { DATA_TESTID, createTestHelpers, runGeneralTests } from './utils'
+import { DATA_TEST_ID, createTestHelpers, runGeneralTests } from './utils'
 
 runGeneralTests('useKeydownFromClick', FunctionComponent)
 
@@ -34,7 +34,7 @@ describe("useKeydownFromClick: hooks' inner workings", () => {
       <FunctionComponent onClick={onClick} />,
     )
 
-    const component = getByTestId(DATA_TESTID)
+    const component = getByTestId(DATA_TEST_ID)
 
     pressEnter(component)
 

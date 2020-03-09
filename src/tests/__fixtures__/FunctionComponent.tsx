@@ -2,7 +2,7 @@ import React from 'react'
 
 import { useKeydownFromClick } from '../../api/useKeydownFromClick'
 import { Options, HookOptions } from '../../typings'
-import { DATA_TESTID } from '../utils'
+import { DATA_TEST_ID } from '../utils'
 
 export type FunctionComponentProps = {
   onClick: () => void
@@ -13,17 +13,13 @@ export const FunctionComponent: React.FC<FunctionComponentProps> = ({
   onClick,
   options,
 }) => {
-  const handleClick = React.useCallback(onClick, [])
-
-  const handleKeyDown = useKeydownFromClick(handleClick, options)
+  const handleKeyDown = useKeydownFromClick(onClick, options)
 
   return (
-    <div
-      data-testid={DATA_TESTID}
-      onClick={handleClick}
+    <button
+      data-testid={DATA_TEST_ID}
+      onClick={onClick}
       onKeyDown={handleKeyDown}
-      role="button"
-      tabIndex={0}
     />
   )
 }

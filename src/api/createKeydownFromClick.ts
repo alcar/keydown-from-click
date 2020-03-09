@@ -7,7 +7,11 @@ export const createKeydownFromClick = <T extends HTMLElement = HTMLElement>(
   clickHandler: React.MouseEventHandler<T>,
   options: Options = {},
 ): React.KeyboardEventHandler<T> => {
-  const { keys: optionsKeys, modifiers: globalModifiers = {} } = options
+  const {
+    keys: optionsKeys,
+    modifiers: globalModifiers = {},
+    shouldPropagate = true,
+  } = options
 
   const keys = optionsKeys
     ? optionsKeys.map(key => key.toLowerCase())
@@ -53,6 +57,10 @@ export const createKeydownFromClick = <T extends HTMLElement = HTMLElement>(
         screenX: 0,
         screenY: 0,
       })
+
+      if (shouldPropagate === false) {
+        event.stopPropagation()
+      }
     }
   }
 }

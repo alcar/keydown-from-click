@@ -10,6 +10,7 @@ export type Modifier = keyof Modifiers
 export type Options = {
   keys?: string[]
   modifiers?: Modifiers
+  shouldPropagate?: boolean
 }
 
 export type HookOptions = {

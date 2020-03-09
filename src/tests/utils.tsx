@@ -15,7 +15,7 @@ import {
   TestHelpers,
 } from './typings'
 
-export const DATA_TESTID = 'component'
+export const DATA_TEST_ID = 'component'
 
 const KEYDOWN_EVENTS: MockedEvents = {
   a: { key: 'a' },
@@ -48,7 +48,7 @@ export const createTestHelpers = (): TestHelpers => {
 const getRenderedComponent = (component: React.ReactElement): HTMLElement => {
   const { getByTestId } = render(component)
 
-  return getByTestId(DATA_TESTID)
+  return getByTestId(DATA_TEST_ID)
 }
 
 export const runGeneralTests = (

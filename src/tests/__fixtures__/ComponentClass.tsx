@@ -2,7 +2,7 @@ import React from 'react'
 
 import { createKeydownFromClick } from '../../api/createKeydownFromClick'
 import { Options } from '../../typings'
-import { DATA_TESTID } from '../utils'
+import { DATA_TEST_ID } from '../utils'
 
 export type ComponentClassProps = {
   onClick: React.MouseEventHandler
@@ -26,7 +26,7 @@ export class ComponentClass extends React.Component<ComponentClassProps> {
   public render(): React.ReactNode {
     return (
       <div
-        data-testid={DATA_TESTID}
+        data-testid={DATA_TEST_ID}
         onClick={this.handleClick}
         onKeyDown={this.handleKeyDown}
         role="button"

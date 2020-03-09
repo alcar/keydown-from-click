@@ -16,7 +16,7 @@ const isValidModifierName = (maybeModifier: string): boolean =>
 const validateModifiers = (modifiers: Modifiers): Modifiers =>
   Object.entries(modifiers).reduce(
     (acc, [currModifierName, currModifierValue]) => {
-      if (!isValidModifierName(currModifierName)) {
+      if (isValidModifierName(currModifierName) === false) {
         warn(
           `'${currModifierName}' is an invalid modifier and, therefore, will be ignored.`,
         )
@@ -56,7 +56,7 @@ export const combineKeysWithModifiers = (
 
         const maybeModifierName = currKeyPart.trim() + 'Key'
 
-        if (!isValidModifierName(maybeModifierName)) {
+        if (isValidModifierName(maybeModifierName) === false) {
           warn(
             `'${currKeySet}' has one or more invalid modifiers and, therefore, will be ignored.`,
           )
@@ -72,7 +72,7 @@ export const combineKeysWithModifiers = (
       { key: '', modifiers: validateModifiers(globalModifiers) },
     )
 
-    if (!currKeyCombo) {
+    if (currKeyCombo === null) {
       return keyComboArrayAcc
     }
 

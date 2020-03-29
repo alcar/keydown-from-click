@@ -15,7 +15,7 @@ export const createKeydownFromClick = <T extends HTMLElement = HTMLElement>(
 
   const keys = optionsKeys
     ? optionsKeys.map(key => key.toLowerCase())
-    : ['enter']
+    : ['enter', ' ']
 
   const keyModifierCombos = combineKeysWithModifiers(keys, globalModifiers)
 

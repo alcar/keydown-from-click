@@ -34,7 +34,7 @@ _To get a better grasp of each function's behavior, please check their individua
 
 ### `createKeydownFromClick(clickHandler[, options])`
 
-Returns a keydown handler that calls `clickHandler` when the Enter key is pressed.
+Returns a keydown handler that calls `clickHandler` when either Enter or Space is pressed.
 
 ```js
 import { createKeydownFromClick } from 'keydown-from-click'
@@ -60,7 +60,7 @@ There are, however, two properties that are not so predictable: `screenX` and `s
 
   An array containing the keys (`DOMString`s) that should trigger `clickHandler`.
 
-  Using this option overrides the default configuration (`['Enter']`).
+  Using this option overrides the default configuration (`['enter', ' ']`).
 
   ```js
   const options = {

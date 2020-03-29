@@ -80,12 +80,16 @@ export const runGeneralTests = (
       onClick.mockClear()
     })
 
-    it('calls the handler on keydown', () => {
+    it('calls the handler with Enter and Space by default', () => {
       const component = getRenderedComponent(<Component onClick={onClick} />)
 
       pressEnter(component)
 
       expect(onClick).toHaveBeenCalledTimes(1)
+
+      fireEvent.keyDown(component, KEYDOWN_EVENTS.space)
+
+      expect(onClick).toHaveBeenCalledTimes(2)
     })
 
     it('works with custom keys', () => {

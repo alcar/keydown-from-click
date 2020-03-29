@@ -48,6 +48,12 @@ const keydownHandler = createKeydownFromClick(clickHandler)
 // ...
 ```
 
+It's worth noting that, in order to call the click handler, **an artificial click event is created**. Most of its properties come from the original keydown event, but some of them are specific to mouse events and need to be mocked.
+
+While the more straightforward ones, such as `button` and `movementX`, receive their corresponding expected values, the properties that involve coordinates (`clientX`, `pageX`, etc.) demand certain decisions. What this library does is **pretend the user clicked in the center of the element**, and then calculates everything based on that.
+
+There are, however, two properties that are not so predictable: `screenX` and `screenY`. The reason for that is because their values depend on whether a left toolbar is open and how tall is the top bar, respectively. This library considers that **there are no left toolbars open** and **the top bar is 80 pixels high**, which is the default state in Chrome 80.
+
 #### Options
 
 - `keys`

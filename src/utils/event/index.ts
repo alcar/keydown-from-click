@@ -36,48 +36,54 @@ const validateModifiers = (modifiers: Modifiers): Modifiers =>
 export const combineKeysWithModifiers = (
   keySets: string[],
   globalModifiers: Modifiers,
-): KeyModifierCombination[] =>
-  keySets.reduce<KeyModifierCombination[]>((keyComboArrayAcc, currKeySet) => {
-    const splitKeyCombination = currKeySet.split('+')
+): KeyModifierCombination[] => {
+  const validGlobalModifiers = validateModifiers(globalModifiers)
 
-    const currKeyCombo = splitKeyCombination.reduce<KeyModifierCombination | null>(
-      (keyComboAcc, currKeyPart, currIndex) => {
-        if (keyComboAcc === null) {
-          return keyComboAcc
-        }
+  return keySets.reduce<KeyModifierCombination[]>(
+    (keyComboArrayAcc, currKeySet) => {
+      const splitKeyCombination = currKeySet.split('+')
 
-        if (currIndex === splitKeyCombination.length - 1) {
-          const hasOnlyWhitespace = /^\s+$/.test(currKeyPart)
+      const currKeyCombo = splitKeyCombination.reduce<KeyModifierCombination | null>(
+        (keyComboAcc, currKeyPart, currIndex) => {
+          if (keyComboAcc === null) {
+            return keyComboAcc
+          }
 
-          const key = hasOnlyWhitespace ? ' ' : currKeyPart.trim()
+          if (currIndex === splitKeyCombination.length - 1) {
+            const hasOnlyWhitespace = /^\s+$/.test(currKeyPart)
 
-          return { ...keyComboAcc, key }
-        }
+            const key = hasOnlyWhitespace ? ' ' : currKeyPart.trim()
 
-        const maybeModifierName = currKeyPart.trim() + 'Key'
+            return { ...keyComboAcc, key }
+          }
 
-        if (isValidModifierName(maybeModifierName) === false) {
-          warn(
-            `'${currKeySet}' has one or more invalid modifiers and, therefore, will be ignored.`,
-          )
+          const maybeModifierName = currKeyPart.trim() + 'Key'
 
-          return null
-        }
+          if (isValidModifierName(maybeModifierName) === false) {
+            warn(
+              `'${currKeySet}' has one or more invalid modifiers and, therefore, will be ignored.`,
+            )
 
-        return {
-          ...keyComboAcc,
-          modifiers: { ...keyComboAcc.modifiers, [maybeModifierName]: true },
-        }
-      },
-      { key: '', modifiers: validateModifiers(globalModifiers) },
-    )
+            return null
+          }
 
-    if (currKeyCombo === null) {
-      return keyComboArrayAcc
-    }
+          return {
+            ...keyComboAcc,
+            modifiers: { ...keyComboAcc.modifiers, [maybeModifierName]: true },
+          }
+        },
+        { key: '', modifiers: validGlobalModifiers },
+      )
 
-    return [...keyComboArrayAcc, currKeyCombo]
-  }, [])
+      if (currKeyCombo === null) {
+        return keyComboArrayAcc
+      }
+
+      return [...keyComboArrayAcc, currKeyCombo]
+    },
+    [],
+  )
+}
 
 const areSameModifiers = (
   modifiers: Modifiers,

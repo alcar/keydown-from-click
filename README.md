@@ -2,7 +2,7 @@
 
 [![npm](https://img.shields.io/npm/v/keydown-from-click.svg)](https://www.npmjs.com/package/keydown-from-click) [![Build Status](https://travis-ci.org/alcar/keydown-from-click.svg?branch=master)](https://travis-ci.org/alcar/keydown-from-click) ![npm bundle size](https://img.shields.io/bundlephobia/minzip/keydown-from-click)
 
-**Generate keydown handlers by replicating click ones.**
+**Generate React keydown handlers by replicating click ones.**
 
 ## Sections
 
@@ -16,11 +16,13 @@
 
 ## Motivation
 
-The [click-events-have-key-events rule](https://github.com/evcohen/eslint-plugin-jsx-a11y/blob/HEAD/docs/rules/click-events-have-key-events.md) from ESLint's [JSX a11y plugin](https://github.com/evcohen/eslint-plugin-jsx-a11y) enforces that click handlers are accompanied by at least one keyboard handler.
+Quoting eslint-plugin-jsx-a11y's [click-events-have-key-events rule](https://github.com/evcohen/eslint-plugin-jsx-a11y/blob/HEAD/docs/rules/click-events-have-key-events.md):
 
 > Coding for the keyboard is important for users with physical disabilities who cannot use a mouse, AT compatibility, and screenreader users.
 
-However, oftentimes the keyboard handler should just replicate the click handler's behavior; this package aims to provide a simple way to do that.
+Therefore, when creating a clickable, non-interactive element in React, we should also "make all functionality available from a keyboard" ([WCAG 2.1, guideline 2.1](<(https://www.w3.org/TR/WCAG21/#keyboard-accessible)>)), i.e., pass it at least one keyboard event handler. Oftentimes, however, the keyboard event handler should just replicate the click handler's actions — similar to how `<button>` elements behave.
+
+This package aims to provide a simple way to do that.
 
 ## Installation
 
@@ -34,7 +36,7 @@ _To get a better grasp of each function's behavior, please check their individua
 
 ### `createKeydownFromClick(clickHandler[, options])`
 
-Returns a keydown handler that calls `clickHandler` when the Enter key is pressed.
+Returns a keydown handler that calls `clickHandler` when either Enter or Space is pressed.
 
 ```js
 import { createKeydownFromClick } from 'keydown-from-click'
@@ -48,13 +50,19 @@ const keydownHandler = createKeydownFromClick(clickHandler)
 // ...
 ```
 
+It's worth noting that, in order to call the click handler, **an artificial click event is created**. Most of its properties come from the original keydown event, but some of them are specific to mouse events and need to be mocked.
+
+While the more straightforward ones, such as `button` and `movementX`, receive their corresponding expected values, the properties that involve coordinates (`clientX`, `pageX`, etc.) demand certain decisions. What this library does is **pretend the user clicked in the center of the element**, and then calculates everything based on that.
+
+There are, however, two properties that are not so predictable: `screenX` and `screenY`. The reason for that is because their values depend on whether a left toolbar is open and how tall is the top bar, respectively. This library considers that **there are no left toolbars open** and **the top bar is 80 pixels high**, which is the default state in Chrome 80.
+
 #### Options
 
 - `keys`
 
   An array containing the keys (`DOMString`s) that should trigger `clickHandler`.
 
-  Using this option overrides the default configuration (`['Enter']`).
+  Using this option overrides the default configuration (`['enter', ' ']`).
 
   ```js
   const options = {
@@ -154,12 +162,6 @@ All releases are documented in the project's [changelog](/CHANGELOG.md).
 
 ## Development
 
-### Building
-
-```
-npm run build
-```
-
 ### Format checking
 
 ```
@@ -170,6 +172,32 @@ npm run checkFormatting
 
 ```
 npm run lint
+```
+
+### Type checking
+
+```
+npm run checkTyping
+```
+
+### Testing
+
+#### Single run
+
+```
+npm run test
+```
+
+#### Watch mode
+
+```
+npm run test --watch
+```
+
+### Building
+
+```
+npm run build
 ```
 
 ### Releasing (and publishing)
@@ -190,26 +218,6 @@ npm run release minor
 
 ```
 npm run release major
-```
-
-### Testing
-
-#### Single run
-
-```
-npm run test
-```
-
-#### Watch mode
-
-```
-npm run test --watch
-```
-
-### Type checking
-
-```
-npm run checkTyping
 ```
 
 ## License

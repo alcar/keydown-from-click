@@ -2,7 +2,7 @@ import React from 'react'
 
 import { createKeydownFromClick } from '../../api/createKeydownFromClick'
 import { Options } from '../../typings'
-import { DATA_TEST_ID } from '../utils'
+import { DATA_TEST_ID } from '../consts'
 
 export type ComponentClassProps = {
   onClick: React.MouseEventHandler

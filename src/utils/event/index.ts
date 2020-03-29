@@ -1,112 +1,124 @@
 import { Modifier, Modifiers } from '../../typings'
 import { warn } from '../console'
 
-import { KeyModifierCombination } from './typings'
+import { KeyModifiersCombination } from './typings'
 
-const MODIFIERS = ['altKey', 'ctrlKey', 'metaKey', 'shiftKey']
+const DEFAULT_MODIFIERS: Modifiers = {
+  altKey: false,
+  ctrlKey: false,
+  metaKey: false,
+  shiftKey: false,
+}
 
-const defaultModifiers: Modifiers = MODIFIERS.reduce(
-  (acc, currModifierName) => ({ ...acc, [currModifierName]: false }),
-  {},
-)
+const modifiersNames = Object.keys(DEFAULT_MODIFIERS)
 
-const isValidModifierName = (maybeModifier: string): boolean =>
-  MODIFIERS.includes(maybeModifier)
+const isValidModifierName = (
+  maybeModifier: string | Modifier,
+): maybeModifier is Modifier => modifiersNames.includes(maybeModifier)
 
 const validateModifiers = (modifiers: Modifiers): Modifiers =>
-  Object.entries(modifiers).reduce(
-    (acc, [currModifierName, currModifierValue]) => {
-      if (isValidModifierName(currModifierName) === false) {
+  Object.entries(modifiers).reduce<Modifiers>(
+    (acc, [modifierName, modifierValue]) => {
+      if (isValidModifierName(modifierName) === false) {
         warn(
-          `'${currModifierName}' is an invalid modifier and, therefore, will be ignored.`,
+          `'${modifierName}' is an invalid modifier and, therefore, will be ignored.`,
         )
-
-        return acc
+      } else if (typeof modifierValue === 'boolean') {
+        acc[modifierName as Modifier] = modifierValue
       }
 
-      if (typeof currModifierValue !== 'boolean') {
-        return acc
-      }
-
-      return { ...acc, [currModifierName]: currModifierValue }
+      return acc
     },
     {},
   )
 
 export const combineKeysWithModifiers = (
-  keySets: string[],
+  keySets: Array<string>,
   globalModifiers: Modifiers,
-): KeyModifierCombination[] =>
-  keySets.reduce<KeyModifierCombination[]>((keyComboArrayAcc, currKeySet) => {
-    const splitKeyCombination = currKeySet.split('+')
+): Array<KeyModifiersCombination> => {
+  const validGlobalModifiers = validateModifiers(globalModifiers)
 
-    const currKeyCombo = splitKeyCombination.reduce<KeyModifierCombination | null>(
-      (keyComboAcc, currKeyPart, currIndex) => {
-        if (keyComboAcc === null) {
-          return keyComboAcc
-        }
+  return keySets.reduce<Array<KeyModifiersCombination>>(
+    (combinationArrayAcc, keySet) => {
+      const splitKeyCombination = keySet.split('+')
 
-        if (currIndex === splitKeyCombination.length - 1) {
-          const hasOnlyWhitespace = /^\s+$/.test(currKeyPart)
+      const keyModifiersCombination = splitKeyCombination.reduce<KeyModifiersCombination | null>(
+        (combinationAcc, keyPart, index) => {
+          if (combinationAcc === null) {
+            return combinationAcc
+          }
 
-          const key = hasOnlyWhitespace ? ' ' : currKeyPart.trim()
+          if (index === splitKeyCombination.length - 1) {
+            const hasOnlyWhitespace = /^\s+$/.test(keyPart)
 
-          return { ...keyComboAcc, key }
-        }
+            const key = hasOnlyWhitespace ? ' ' : keyPart.trim()
 
-        const maybeModifierName = currKeyPart.trim() + 'Key'
+            return { ...combinationAcc, key }
+          }
 
-        if (isValidModifierName(maybeModifierName) === false) {
-          warn(
-            `'${currKeySet}' has one or more invalid modifiers and, therefore, will be ignored.`,
-          )
+          const maybeModifierName = keyPart.trim() + 'Key'
 
-          return null
-        }
+          if (isValidModifierName(maybeModifierName) === false) {
+            warn(
+              `'${keySet}' has one or more invalid modifiers and, therefore, will be ignored.`,
+            )
 
-        return {
-          ...keyComboAcc,
-          modifiers: { ...keyComboAcc.modifiers, [maybeModifierName]: true },
-        }
-      },
-      { key: '', modifiers: validateModifiers(globalModifiers) },
-    )
+            return null
+          }
 
-    if (currKeyCombo === null) {
-      return keyComboArrayAcc
-    }
+          return {
+            ...combinationAcc,
+            modifiers: {
+              ...combinationAcc.modifiers,
+              [maybeModifierName]: true,
+            },
+          }
+        },
+        { key: '', modifiers: validGlobalModifiers },
+      )
 
-    return [...keyComboArrayAcc, currKeyCombo]
-  }, [])
+      if (keyModifiersCombination === null) {
+        return combinationArrayAcc
+      }
+
+      return [...combinationArrayAcc, keyModifiersCombination]
+    },
+    [],
+  )
+}
 
 const areSameModifiers = (
   modifiers: Modifiers,
   event: React.KeyboardEvent,
 ): boolean => {
-  const completeModifiers = { ...defaultModifiers, ...modifiers }
+  const completeModifiers = { ...DEFAULT_MODIFIERS, ...modifiers }
 
-  return Object.entries(completeModifiers).reduce<boolean>(
-    (acc, [currModifierKey, currModifierValue]) =>
-      acc && event[currModifierKey as Modifier] === currModifierValue,
-    true,
-  )
+  const completeModifiersEntries = Object.entries(completeModifiers)
+
+  for (let i = 0; i < completeModifiersEntries.length; i++) {
+    const [modifierKey, modifierValue] = completeModifiersEntries[i]
+
+    if (event[modifierKey as Modifier] !== modifierValue) {
+      return false
+    }
+  }
+
+  return true
 }
 
 export const shouldTriggerHandler = (
-  keyModifierCombos: KeyModifierCombination[],
+  keyModifierCombos: Array<KeyModifiersCombination>,
   event: React.KeyboardEvent,
-): boolean =>
-  keyModifierCombos.reduce<boolean>(
-    (acc, { key: currKey, modifiers: currModifiers }) => {
-      if (acc === true) {
-        return acc
-      }
+): boolean => {
+  for (let i = 0; i < keyModifierCombos.length; i++) {
+    const { key, modifiers } = keyModifierCombos[i]
 
-      const isSameKey = currKey === event.key.toLowerCase()
+    const isSameKey = key === event.key.toLowerCase()
 
-      const shouldTrigger = isSameKey && areSameModifiers(currModifiers, event)
+    if (isSameKey && areSameModifiers(modifiers, event)) {
+      return true
+    }
+  }
 
-      return acc || shouldTrigger
-    },
-    false,
-  )
+  return false
+}

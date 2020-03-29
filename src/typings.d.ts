@@ -8,13 +8,13 @@ export type Modifiers = {
 export type Modifier = keyof Modifiers
 
 export type Options = {
-  keys?: string[]
+  keys?: Array<string>
   modifiers?: Modifiers
   shouldPropagate?: boolean
 }
 
 export type HookOptions = {
-  extraDependencies?: unknown[]
+  extraDependencies?: Array<unknown>
 }
 
 export { createKeydownFromClick } from './api/createKeydownFromClick'

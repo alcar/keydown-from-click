@@ -7,6 +7,24 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- **[BREAKING]** Space as one of the default keys.
+
+### Changed
+
+- **[BREAKING]** The artificial click event now attempts to simulate a click in the center of the element;
+- Restructure tests folder;
+- Mention "React" in the project description;
+- Improve README's "Motivation" section;
+- Reorder README's "Development" section's subsections;
+- Upgrade dependencies.
+
+### Removed
+
+- Unnecessary repetitions of the validation of global modifiers;
+- Duplicated general tests.
+
 ## [2.1.1] - 2020-03-24
 
 ### Security

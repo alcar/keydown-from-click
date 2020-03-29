@@ -2,7 +2,7 @@
 
 [![npm](https://img.shields.io/npm/v/keydown-from-click.svg)](https://www.npmjs.com/package/keydown-from-click) [![Build Status](https://travis-ci.org/alcar/keydown-from-click.svg?branch=master)](https://travis-ci.org/alcar/keydown-from-click) ![npm bundle size](https://img.shields.io/bundlephobia/minzip/keydown-from-click)
 
-**Generate keydown handlers by replicating click ones.**
+**Generate React keydown handlers by replicating click ones.**
 
 ## Sections
 

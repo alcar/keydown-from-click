@@ -16,11 +16,13 @@
 
 ## Motivation
 
-The [click-events-have-key-events rule](https://github.com/evcohen/eslint-plugin-jsx-a11y/blob/HEAD/docs/rules/click-events-have-key-events.md) from ESLint's [JSX a11y plugin](https://github.com/evcohen/eslint-plugin-jsx-a11y) enforces that click handlers are accompanied by at least one keyboard handler.
+Quoting eslint-plugin-jsx-a11y's [click-events-have-key-events rule](https://github.com/evcohen/eslint-plugin-jsx-a11y/blob/HEAD/docs/rules/click-events-have-key-events.md):
 
 > Coding for the keyboard is important for users with physical disabilities who cannot use a mouse, AT compatibility, and screenreader users.
 
-However, oftentimes the keyboard handler should just replicate the click handler's behavior; this package aims to provide a simple way to do that.
+Therefore, when creating a clickable, non-interactive element in React, we should also "make all functionality available from a keyboard" ([WCAG 2.1, guideline 2.1](<(https://www.w3.org/TR/WCAG21/#keyboard-accessible)>)), i.e., pass it at least one keyboard event handler. Oftentimes, however, the keyboard event handler should just replicate the click handler's actions — similar to how `<button>` elements behave.
+
+This package aims to provide a simple way to do that.
 
 ## Installation
 

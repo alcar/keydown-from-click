@@ -14,6 +14,6 @@ export type TestHelpers = {
   onClick: jest.Mock
   pressEnter: (
     target: Parameters<FireFunction>[0],
-    modifiers?: Modifier[],
+    modifiers?: Array<Modifier>,
   ) => void
 }

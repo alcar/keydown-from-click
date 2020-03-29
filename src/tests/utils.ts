@@ -6,7 +6,7 @@ import { DATA_TEST_ID, KEYDOWN_EVENTS } from './consts'
 import { MockedEvent, MockedEventWithModifiers, TestHelpers } from './typings'
 
 export const addModifiers = (
-  modifiers: Modifier[],
+  modifiers: Array<Modifier>,
   event: MockedEvent,
 ): MockedEventWithModifiers => ({
   ...event,

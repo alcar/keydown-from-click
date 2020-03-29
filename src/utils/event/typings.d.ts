@@ -1,6 +1,6 @@
 import { Modifiers } from '../../typings'
 
-export type KeyModifierCombination = {
+export type KeyModifiersCombination = {
   key: string
   modifiers: Modifiers
 }

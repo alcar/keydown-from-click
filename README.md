@@ -162,12 +162,6 @@ All releases are documented in the project's [changelog](/CHANGELOG.md).
 
 ## Development
 
-### Building
-
-```
-npm run build
-```
-
 ### Format checking
 
 ```
@@ -178,6 +172,32 @@ npm run checkFormatting
 
 ```
 npm run lint
+```
+
+### Type checking
+
+```
+npm run checkTyping
+```
+
+### Testing
+
+#### Single run
+
+```
+npm run test
+```
+
+#### Watch mode
+
+```
+npm run test --watch
+```
+
+### Building
+
+```
+npm run build
 ```
 
 ### Releasing (and publishing)
@@ -198,26 +218,6 @@ npm run release minor
 
 ```
 npm run release major
-```
-
-### Testing
-
-#### Single run
-
-```
-npm run test
-```
-
-#### Watch mode
-
-```
-npm run test --watch
-```
-
-### Type checking
-
-```
-npm run checkTyping
 ```
 
 ## License

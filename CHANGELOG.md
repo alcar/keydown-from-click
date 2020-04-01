@@ -7,6 +7,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- `detail` and `view` properties to the artificial click event;
+- "@types/react" and "@types/react-dom" as dev dependencies.
+
+### Changed
+
+- Set `tsconfig.json`'s `skipLibCheck` to `true`;
+- Make minor improvements to the README;
+- Upgrade dependencies.
+
 ## [3.0.1] - 2020-03-29
 
 ### Fixed

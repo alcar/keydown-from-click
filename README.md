@@ -20,7 +20,7 @@ Quoting eslint-plugin-jsx-a11y's [click-events-have-key-events rule](https://git
 
 > Coding for the keyboard is important for users with physical disabilities who cannot use a mouse, AT compatibility, and screenreader users.
 
-Therefore, when creating a clickable, non-interactive element in React, we should also "make all functionality available from a keyboard" ([WCAG 2.1, guideline 2.1](https://www.w3.org/TR/WCAG21/#keyboard-accessible)), i.e., pass it at least one keyboard event handler. Oftentimes, however, the keyboard event handler should just replicate the click handler's actions — similar to how `<button>` elements behave.
+Therefore, when creating a clickable, non-interactive element in React, we should also **"make all functionality available from a keyboard"** ([WCAG 2.1, guideline 2.1](https://www.w3.org/TR/WCAG21/#keyboard-accessible)), i.e., pass it at least one keyboard event handler. Oftentimes, however, the keyboard event handler should just replicate the click handler's actions — similar to how `<button>` elements behave.
 
 This package aims to provide a simple way to do that.
 
@@ -62,7 +62,7 @@ There are, however, two properties that are not so predictable: `screenX` and `s
 
   An array containing the keys (`DOMString`s) that should trigger `clickHandler`.
 
-  Using this option overrides the default configuration (`['enter', ' ']`).
+  Using this option **overrides the default configuration** (`['enter', ' ']`).
 
   ```js
   const options = {
@@ -72,7 +72,7 @@ There are, however, two properties that are not so predictable: `screenX` and `s
 
 - `modifiers`
 
-  An object containing the modifier keys (`altKey`, `ctrlKey`, `metaKey`, `shiftKey`) that should be pressed and held down while pressing Enter – or any of the keys from the `keys` option.
+  An object containing the modifier keys (`altKey`, `ctrlKey`, `metaKey`, `shiftKey`) that should be pressed and held down while pressing Enter — or any of the keys from the `keys` option.
 
   ```js
   const options = {
@@ -83,7 +83,7 @@ There are, however, two properties that are not so predictable: `screenX` and `s
   }
   ```
 
-  The `modifiers` option is applied to all keys, but can be shadowed by inline modifiers (`alt`, `ctrl`, `meta`, `shift`); to do so, just prefix them to your keys along with a plus sign (`+`).
+  The `modifiers` option **is applied to all keys**, but can be shadowed by inline modifiers (`alt`, `ctrl`, `meta`, `shift`); to do so, just prefix them to your keys along with a plus sign (`+`).
 
   ```js
   const options = {
@@ -142,15 +142,15 @@ _All options from `createKeydownFromClick` are also available to `useKeydownFrom
 
 - `extraDependencies`
 
-  An array containing the dependencies that should cause React's `useMemo` to recompute the memoized keydown handler.
-
-  Using this option **won't** override the default configuration; the values of `extraDependencies` will be added to the end of the dependencies array.
+  An array containing the dependencies that should cause React's `useMemo` to recompute the memoized keydown event handler.
 
   ```js
   const options = {
     extraDependencies: [someVar, someOtherVar],
   }
   ```
+
+  Using this option **won't** override the default configuration; the values of `extraDependencies` will be added to the end of the dependencies array.
 
 ## Example
 

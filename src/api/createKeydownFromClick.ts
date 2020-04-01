@@ -63,6 +63,7 @@ export const createKeydownFromClick = <T extends HTMLElement = HTMLElement>(
         ctrlKey: event.ctrlKey,
         currentTarget: event.currentTarget,
         defaultPrevented: event.defaultPrevented,
+        detail: 1,
         eventPhase: event.eventPhase,
         getModifierState: function(key: string) {
           if (
@@ -89,6 +90,7 @@ export const createKeydownFromClick = <T extends HTMLElement = HTMLElement>(
         target: event.target,
         timeStamp: event.timeStamp,
         type: event.type,
+        view: window,
       })
 
       if (shouldPropagate === false) {

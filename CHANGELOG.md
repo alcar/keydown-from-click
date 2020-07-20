@@ -7,6 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+- Updated some configuration files.
+
+### Security
+
+- Upgrade "lodash" and all other upgradable dependencies.
+
 ## [3.1.0] - 2020-04-01
 
 ### Added

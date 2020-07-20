@@ -65,7 +65,7 @@ export const createKeydownFromClick = <T extends HTMLElement = HTMLElement>(
         defaultPrevented: event.defaultPrevented,
         detail: 1,
         eventPhase: event.eventPhase,
-        getModifierState: function(key: string) {
+        getModifierState: function (key: string) {
           if (
             (key === 'Alt' && event.altKey) ||
             (key === 'Control' && event.ctrlKey) ||

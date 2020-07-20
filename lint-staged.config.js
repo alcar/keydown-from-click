@@ -1,4 +1,4 @@
 module.exports = {
-  '*.{json,md}': ['npx prettier', 'git add'],
-  '*.{ts,tsx}': ['npx prettier', 'eslint --max-warnings=0', 'git add'],
+  '*.{json,md}': ['npx prettier'],
+  '*.{ts,tsx}': ['npx prettier', 'eslint --max-warnings=0'],
 }

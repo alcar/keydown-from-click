@@ -7,6 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Removed
+
+-`@types/testing-library__react`, since `@testing-library/react` provides its own type definitions.
+
+### Security
+
+- Upgrade `axios`, `ini`, `node-notifier`, and all other upgradable dependencies.
+
 ## [3.1.1] - 2020-07-20
 
 ### Changed
@@ -15,14 +23,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Security
 
-- Upgrade "lodash" and all other upgradable dependencies.
+- Upgrade `lodash` and all other upgradable dependencies.
 
 ## [3.1.0] - 2020-04-01
 
 ### Added
 
 - `detail` and `view` properties to the artificial click event;
-- "@types/react" and "@types/react-dom" as dev dependencies.
+- `@types/react` and `@types/react-dom` as dev dependencies.
 
 ### Changed
 
@@ -46,7 +54,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - **[BREAKING]** The artificial click event now attempts to simulate a click in the center of the element;
 - Restructure tests folder;
-- Mention "React" in the project description;
+- Mention React in the project description;
 - Improve README's "Motivation" section;
 - Reorder README's "Development" section's subsections;
 - Upgrade dependencies.

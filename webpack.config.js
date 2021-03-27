@@ -1,12 +1,13 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
-const MinifyPlugin = require('babel-minify-webpack-plugin')
 const path = require('path')
+const TerserPlugin = require('terser-webpack-plugin')
 const nodeExternals = require('webpack-node-externals')
 
 module.exports = {
   context: path.join(__dirname, 'src'),
   entry: './index.ts',
   externals: [nodeExternals()],
+  externalsPresets: { node: true },
   mode: 'production',
   module: {
     rules: [
@@ -19,14 +20,16 @@ module.exports = {
       },
     ],
   },
+  optimization: {
+    minimize: true,
+    minimizer: [new TerserPlugin()],
+  },
   output: {
     filename: 'index.js',
     libraryTarget: 'commonjs2',
     path: path.resolve(__dirname, 'build'),
   },
-  plugins: [new MinifyPlugin()],
   resolve: {
     extensions: ['.js', '.ts', '.tsx'],
   },
-  target: 'node',
 }

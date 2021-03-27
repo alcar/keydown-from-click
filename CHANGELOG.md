@@ -7,6 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+- Bump webpack to major 5.
+
+### Security
+
+- Upgrade all upgradable dependencies.
+
 ## [3.1.2] - 2021-02-21
 
 ### Removed
@@ -21,7 +29,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
-- Updated some configuration files.
+- Update some configuration files.
 
 ### Security
 

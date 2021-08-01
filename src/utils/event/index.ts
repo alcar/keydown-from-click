@@ -42,40 +42,41 @@ export const combineKeysWithModifiers = (
     (combinationArrayAcc, keySet) => {
       const splitKeyCombination = keySet.split('+')
 
-      const keyModifiersCombination = splitKeyCombination.reduce<KeyModifiersCombination | null>(
-        (combinationAcc, keyPart, index) => {
-          if (combinationAcc === null) {
-            return combinationAcc
-          }
+      const keyModifiersCombination =
+        splitKeyCombination.reduce<KeyModifiersCombination | null>(
+          (combinationAcc, keyPart, index) => {
+            if (combinationAcc === null) {
+              return combinationAcc
+            }
 
-          if (index === splitKeyCombination.length - 1) {
-            const hasOnlyWhitespace = /^\s+$/.test(keyPart)
+            if (index === splitKeyCombination.length - 1) {
+              const hasOnlyWhitespace = /^\s+$/.test(keyPart)
 
-            const key = hasOnlyWhitespace ? ' ' : keyPart.trim()
+              const key = hasOnlyWhitespace ? ' ' : keyPart.trim()
 
-            return { ...combinationAcc, key }
-          }
+              return { ...combinationAcc, key }
+            }
 
-          const maybeModifierName = keyPart.trim() + 'Key'
+            const maybeModifierName = keyPart.trim() + 'Key'
 
-          if (isValidModifierName(maybeModifierName) === false) {
-            warn(
-              `'${keySet}' has one or more invalid modifiers and, therefore, will be ignored.`,
-            )
+            if (isValidModifierName(maybeModifierName) === false) {
+              warn(
+                `'${keySet}' has one or more invalid modifiers and, therefore, will be ignored.`,
+              )
 
-            return null
-          }
+              return null
+            }
 
-          return {
-            ...combinationAcc,
-            modifiers: {
-              ...combinationAcc.modifiers,
-              [maybeModifierName]: true,
-            },
-          }
-        },
-        { key: '', modifiers: validGlobalModifiers },
-      )
+            return {
+              ...combinationAcc,
+              modifiers: {
+                ...combinationAcc.modifiers,
+                [maybeModifierName]: true,
+              },
+            }
+          },
+          { key: '', modifiers: validGlobalModifiers },
+        )
 
       if (keyModifiersCombination === null) {
         return combinationArrayAcc

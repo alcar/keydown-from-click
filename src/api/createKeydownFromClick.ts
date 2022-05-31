@@ -1,5 +1,4 @@
-import React from 'react'
-
+import { AbstractView } from 'react'
 import { Options } from '../typings'
 import { combineKeysWithModifiers, shouldTriggerHandler } from '../utils/event'
 
@@ -90,7 +89,9 @@ export const createKeydownFromClick = <T extends HTMLElement = HTMLElement>(
         target: event.target,
         timeStamp: event.timeStamp,
         type: event.type,
-        view: window,
+
+        // TODO: re-evaluate the need for a typecast after bumping React to v18.
+        view: window as unknown as AbstractView,
       })
 
       if (shouldPropagate === false) {

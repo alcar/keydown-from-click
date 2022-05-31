@@ -123,7 +123,6 @@ The hook version of `createKeydownFromClick`.
 
 ```js
 import { useKeydownFromClick } from 'keydown-from-click'
-import React from 'react'
 
 const clickHandler = () => {
   console.log('Boop!')

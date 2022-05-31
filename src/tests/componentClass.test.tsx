@@ -1,5 +1,4 @@
 import { fireEvent } from '@testing-library/react'
-import React from 'react'
 
 import { createKeydownFromClick } from '../index'
 import * as consoleModule from '../utils/console'

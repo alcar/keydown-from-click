@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Security
+
+- Upgrade all upgradable dependencies;
+- Start using exact versions in `package.json`.
+
 ## [3.1.4] - 2021-08-01
 
 ### Security

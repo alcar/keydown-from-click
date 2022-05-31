@@ -7,6 +7,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+- **[BREAKING]** Set `react`'s minimum version to 18.0.0 in peer dependencies;
+- **[BREAKING]** Add `react-dom` to peer dependencies;
+- Bump all dev dependencies related to React to their respective latest majors.
+
+### Fixed
+
+- Remove extra links from the bottom of the changelog.
+
 ## [3.1.5] - 2022-05-31
 
 ### Security
@@ -217,7 +227,3 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - Initial files.
-
-
-[Unreleased]: https://github.com/alcar/keydown-from-click/compare/v3.1.5...HEAD
-[3.1.5]: https://github.com/alcar/keydown-from-click/compare/v3.1.4...v3.1.5

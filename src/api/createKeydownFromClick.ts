@@ -2,6 +2,11 @@ import { AbstractView } from 'react'
 import { Options } from '../typings'
 import { combineKeysWithModifiers, shouldTriggerHandler } from '../utils/event'
 
+/**
+ * Based on Chrome 80.
+ */
+const BROWSER_TOP_BAR_HEIGHT_ESTIMATE = 80
+
 export const createKeydownFromClick = <T extends HTMLElement = HTMLElement>(
   clickHandler: React.MouseEventHandler<T>,
   options: Options = {},
@@ -33,8 +38,6 @@ export const createKeydownFromClick = <T extends HTMLElement = HTMLElement>(
       const elementCenterPageY = elementCenterClientY - bodyY
 
       const elementCenterScreenX = window.screenLeft + elementCenterClientX
-
-      const BROWSER_TOP_BAR_HEIGHT_ESTIMATE = 80
 
       const elementCenterScreenY =
         window.screenTop +
@@ -90,7 +93,7 @@ export const createKeydownFromClick = <T extends HTMLElement = HTMLElement>(
         timeStamp: event.timeStamp,
         type: event.type,
 
-        // TODO: re-evaluate the need for a typecast after bumping React to v18.
+        // TODO: come up with a good mock for `view.styleMedia`.
         view: window as unknown as AbstractView,
       })
 

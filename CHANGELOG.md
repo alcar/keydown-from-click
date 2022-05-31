@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [3.1.5] - 2022-05-31
+
 ### Security
 
 - Upgrade all upgradable dependencies;
@@ -215,3 +217,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - Initial files.
+
+
+[Unreleased]: https://github.com/alcar/keydown-from-click/compare/v3.1.5...HEAD
+[3.1.5]: https://github.com/alcar/keydown-from-click/compare/v3.1.4...v3.1.5

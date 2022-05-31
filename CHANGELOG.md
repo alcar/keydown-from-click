@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [4.0.0] - 2022-05-31
+
 ### Changed
 
 - **[BREAKING]** Set `react`'s minimum version to 18.0.0 in peer dependencies;

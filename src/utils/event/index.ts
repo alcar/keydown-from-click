@@ -1,3 +1,4 @@
+import { KeyboardEvent } from 'react'
 import { Modifier, Modifiers } from '../../typings'
 import { warn } from '../console'
 
@@ -90,7 +91,7 @@ export const combineKeysWithModifiers = (
 
 const areSameModifiers = (
   modifiers: Modifiers,
-  event: React.KeyboardEvent,
+  event: KeyboardEvent,
 ): boolean => {
   const completeModifiers = { ...DEFAULT_MODIFIERS, ...modifiers }
 
@@ -109,7 +110,7 @@ const areSameModifiers = (
 
 export const shouldTriggerHandler = (
   keyModifierCombos: Array<KeyModifiersCombination>,
-  event: React.KeyboardEvent,
+  event: KeyboardEvent,
 ): boolean => {
   for (let i = 0; i < keyModifierCombos.length; i++) {
     const { key, modifiers } = keyModifierCombos[i]

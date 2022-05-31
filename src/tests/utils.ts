@@ -1,8 +1,8 @@
-import { fireEvent, render } from '@testing-library/react'
+import { fireEvent } from '@testing-library/react'
 
 import { Modifier } from '../typings'
 
-import { DATA_TEST_ID, KEYDOWN_EVENTS } from './consts'
+import { KEYDOWN_EVENTS } from './consts'
 import { MockedEvent, MockedEventWithModifiers, TestHelpers } from './typings'
 
 export const addModifiers = (
@@ -24,12 +24,4 @@ export const createTestHelpers = (): TestHelpers => {
   }
 
   return { onClick, pressEnter }
-}
-
-export const getRenderedComponent = (
-  component: React.ReactElement,
-): HTMLElement => {
-  const { getByTestId } = render(component)
-
-  return getByTestId(DATA_TEST_ID)
 }

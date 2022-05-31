@@ -1,12 +1,11 @@
-import { fireEvent } from '@testing-library/react'
+import { fireEvent, render, screen } from '@testing-library/react'
 
-import { createKeydownFromClick } from '../index'
 import * as consoleModule from '../utils/console'
 import * as eventUtilsModule from '../utils/event'
 
-import { ComponentClass } from './__fixtures__/ComponentClass'
+import { ClassComponent } from './__fixtures__/ClassComponent'
 import { KEYDOWN_EVENTS } from './consts'
-import { addModifiers, createTestHelpers, getRenderedComponent } from './utils'
+import { addModifiers, createTestHelpers } from './utils'
 
 const { onClick, pressEnter } = createTestHelpers()
 
@@ -30,7 +29,9 @@ afterEach(() => {
 })
 
 it('calls the handler with Enter and Space by default', () => {
-  const component = getRenderedComponent(<ComponentClass onClick={onClick} />)
+  render(<ClassComponent onClick={onClick} />)
+
+  const component = screen.getByRole('button')
 
   pressEnter(component)
 
@@ -42,12 +43,14 @@ it('calls the handler with Enter and Space by default', () => {
 })
 
 it('works with custom keys', () => {
-  const component = getRenderedComponent(
-    <ComponentClass
+  render(
+    <ClassComponent
       onClick={onClick}
       options={{ keys: [KEYDOWN_EVENTS.a.key, KEYDOWN_EVENTS.z.key] }}
     />,
   )
+
+  const component = screen.getByRole('button')
 
   // Press 'a', 1st call
   fireEvent.keyDown(component, KEYDOWN_EVENTS.a)
@@ -76,8 +79,8 @@ it('works with custom keys', () => {
 })
 
 it('works with custom keys with inline modifiers', () => {
-  const component = getRenderedComponent(
-    <ComponentClass
+  render(
+    <ClassComponent
       onClick={onClick}
       options={{
         keys: [
@@ -88,6 +91,8 @@ it('works with custom keys with inline modifiers', () => {
       }}
     />,
   )
+
+  const component = screen.getByRole('button')
 
   // Press 'a', no calls
   fireEvent.keyDown(component, KEYDOWN_EVENTS.a)
@@ -137,8 +142,8 @@ it('works with custom keys with inline modifiers', () => {
 })
 
 it('handles extra whitespace in custom keys (including Space)', () => {
-  const component = getRenderedComponent(
-    <ComponentClass
+  render(
+    <ClassComponent
       onClick={onClick}
       options={{
         keys: [
@@ -150,6 +155,8 @@ it('handles extra whitespace in custom keys (including Space)', () => {
       }}
     />,
   )
+
+  const component = screen.getByRole('button')
 
   // Press 'a', no calls
   fireEvent.keyDown(component, KEYDOWN_EVENTS.a)
@@ -209,14 +216,16 @@ it('handles extra whitespace in custom keys (including Space)', () => {
 })
 
 it('works with custom global modifiers', () => {
-  const component = getRenderedComponent(
-    <ComponentClass
+  render(
+    <ClassComponent
       onClick={onClick}
       options={{
         modifiers: { altKey: true, metaKey: false, shiftKey: true },
       }}
     />,
   )
+
+  const component = screen.getByRole('button')
 
   // Press Enter, no calls
   pressEnter(component)
@@ -255,8 +264,8 @@ it('works with custom global modifiers', () => {
 })
 
 it('works with both custom keys and custom global modifiers', () => {
-  const component = getRenderedComponent(
-    <ComponentClass
+  render(
+    <ClassComponent
       onClick={onClick}
       options={{
         keys: [KEYDOWN_EVENTS.a.key],
@@ -264,6 +273,8 @@ it('works with both custom keys and custom global modifiers', () => {
       }}
     />,
   )
+
+  const component = screen.getByRole('button')
 
   // Press 'a', no calls
   fireEvent.keyDown(component, KEYDOWN_EVENTS.a)
@@ -311,8 +322,8 @@ it('works with both custom keys and custom global modifiers', () => {
 })
 
 it('works with both custom keys with inline modifiers and custom global modifiers', () => {
-  const component = getRenderedComponent(
-    <ComponentClass
+  render(
+    <ClassComponent
       onClick={onClick}
       options={{
         keys: [
@@ -324,6 +335,8 @@ it('works with both custom keys with inline modifiers and custom global modifier
       }}
     />,
   )
+
+  const component = screen.getByRole('button')
 
   // Press 'a', no calls
   fireEvent.keyDown(component, KEYDOWN_EVENTS.a)
@@ -388,8 +401,8 @@ it('evaluates and validates keys and modifiers from options only once', () => {
 
   expect(spiedCombineKeysWithModifiers).toHaveBeenCalledTimes(0)
 
-  const component = getRenderedComponent(
-    <ComponentClass
+  render(
+    <ClassComponent
       onClick={onClick}
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       options={{
@@ -402,6 +415,8 @@ it('evaluates and validates keys and modifiers from options only once', () => {
       }}
     />,
   )
+
+  const component = screen.getByRole('button')
 
   expect(spiedCombineKeysWithModifiers).toHaveBeenCalledTimes(1)
 
@@ -425,8 +440,8 @@ it('ignores keys with invalid inline modifiers and warns user', () => {
 
   expect(spiedConsoleWarn).toHaveBeenCalledTimes(0)
 
-  const component = getRenderedComponent(
-    <ComponentClass
+  render(
+    <ClassComponent
       onClick={onClick}
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       options={{
@@ -437,6 +452,8 @@ it('ignores keys with invalid inline modifiers and warns user', () => {
       }}
     />,
   )
+
+  const component = screen.getByRole('button')
 
   expect(spiedConsoleWarn).toHaveBeenCalledTimes(1)
 
@@ -456,13 +473,15 @@ it('ignores invalid global modifiers and warns user', () => {
 
   expect(spiedConsoleWarn).toHaveBeenCalledTimes(0)
 
-  const component = getRenderedComponent(
-    <ComponentClass
+  render(
+    <ClassComponent
       onClick={onClick}
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       options={{ modifiers: { [INVALID_MODIFIER]: true } as any }}
     />,
   )
+
+  const component = screen.getByRole('button')
 
   expect(spiedConsoleWarn).toHaveBeenCalledTimes(1)
 
@@ -472,47 +491,39 @@ it('ignores invalid global modifiers and warns user', () => {
 })
 
 it('propagates the event by default', () => {
-  const parentClickHandlerMock = jest.fn()
+  const parentKeydownHandlerMock = jest.fn()
 
-  const parentKeyDownHandler = createKeydownFromClick(parentClickHandlerMock)
-
-  const childComponent = getRenderedComponent(
-    <div
-      onClick={parentClickHandlerMock}
-      onKeyDown={parentKeyDownHandler}
-      role="button"
-      tabIndex={0}
-    >
-      <ComponentClass onClick={onClick} />
+  render(
+    // eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions
+    <div onKeyDown={parentKeydownHandlerMock}>
+      <ClassComponent onClick={onClick} />
     </div>,
   )
 
-  expect(parentClickHandlerMock).toHaveBeenCalledTimes(0)
+  const childComponent = screen.getByRole('button')
+
+  expect(parentKeydownHandlerMock).toHaveBeenCalledTimes(0)
 
   pressEnter(childComponent)
 
-  expect(parentClickHandlerMock).toHaveBeenCalledTimes(1)
+  expect(parentKeydownHandlerMock).toHaveBeenCalledTimes(1)
 })
 
 it('does not propagate the event when shouldPropagate is false', () => {
-  const parentClickHandlerMock = jest.fn()
+  const parentKeydownHandlerMock = jest.fn()
 
-  const parentKeyDownHandler = createKeydownFromClick(parentClickHandlerMock)
-
-  const childComponent = getRenderedComponent(
-    <div
-      onClick={parentClickHandlerMock}
-      onKeyDown={parentKeyDownHandler}
-      role="button"
-      tabIndex={0}
-    >
-      <ComponentClass onClick={onClick} options={{ shouldPropagate: false }} />
+  render(
+    // eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions
+    <div onKeyDown={parentKeydownHandlerMock}>
+      <ClassComponent onClick={onClick} options={{ shouldPropagate: false }} />
     </div>,
   )
 
-  expect(parentClickHandlerMock).toHaveBeenCalledTimes(0)
+  const childComponent = screen.getByRole('button')
+
+  expect(parentKeydownHandlerMock).toHaveBeenCalledTimes(0)
 
   pressEnter(childComponent)
 
-  expect(parentClickHandlerMock).toHaveBeenCalledTimes(0)
+  expect(parentKeydownHandlerMock).toHaveBeenCalledTimes(0)
 })

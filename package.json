@@ -15,6 +15,12 @@
     "release": "releasy",
     "test": "jest"
   },
+  "files": [
+    "build/",
+    "LICENSE",
+    "README.md",
+    "src/typings.d.ts"
+  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/alcar/keydown-from-click.git"

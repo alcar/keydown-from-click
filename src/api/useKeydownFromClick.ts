@@ -1,18 +1,23 @@
-import React from 'react'
+import {
+  KeyboardEventHandler,
+  MouseEventHandler,
+  useCallback,
+  useMemo,
+} from 'react'
 
 import { HookOptions, Options } from '../typings'
 
 import { createKeydownFromClick } from './createKeydownFromClick'
 
-export const useKeydownFromClick = <T extends HTMLElement = HTMLElement>(
-  clickHandler: React.MouseEventHandler<T>,
+export const useKeydownFromClick = <TElement extends HTMLElement = HTMLElement>(
+  clickHandler: MouseEventHandler<TElement>,
   options: Options & HookOptions = {},
-): React.KeyboardEventHandler<T> => {
+): KeyboardEventHandler<TElement> => {
   const { extraDependencies, keys, modifiers, shouldPropagate } = options
 
-  const keydownHandler = React.useMemo(
+  const keydownHandler = useMemo(
     () =>
-      createKeydownFromClick<T>(clickHandler, {
+      createKeydownFromClick<TElement>(clickHandler, {
         keys,
         modifiers,
         shouldPropagate,
@@ -23,5 +28,5 @@ export const useKeydownFromClick = <T extends HTMLElement = HTMLElement>(
       : [clickHandler, keys, modifiers, shouldPropagate],
   )
 
-  return React.useCallback(event => keydownHandler(event), [keydownHandler])
+  return useCallback(event => keydownHandler(event), [keydownHandler])
 }

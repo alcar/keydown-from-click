@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+- Refactor tests;
+- Refactor types;
+- Improve README to make it clearer when to use this package.
+
 ## [4.0.0] - 2022-05-31
 
 ### Changed
@@ -14,6 +20,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **[BREAKING]** Set `react`'s minimum version to 18.0.0 in peer dependencies;
 - **[BREAKING]** Add `react-dom` to peer dependencies;
 - Bump all dev dependencies related to React to their respective latest majors.
+
+### Removed
+
+- Unnecessary files from npm package.
 
 ### Fixed
 
@@ -46,7 +56,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Removed
 
--`@types/testing-library__react`, since `@testing-library/react` provides its own type definitions.
+- `@types/testing-library__react`, since `@testing-library/react` provides its own type definitions.
 
 ### Security
 

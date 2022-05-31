@@ -1,9 +1,8 @@
-import { render } from '@testing-library/react'
+import { render, screen } from '@testing-library/react'
 
 import * as createKeydownFromClickModule from '../api/createKeydownFromClick'
 
 import { FunctionComponent } from './__fixtures__/FunctionComponent'
-import { DATA_TEST_ID } from './consts'
 import { createTestHelpers } from './utils'
 
 const { onClick, pressEnter } = createTestHelpers()
@@ -27,11 +26,9 @@ afterEach(() => {
 })
 
 it('memoizes the handler creation', () => {
-  const { getByTestId, rerender } = render(
-    <FunctionComponent onClick={onClick} />,
-  )
+  const { rerender } = render(<FunctionComponent onClick={onClick} />)
 
-  const component = getByTestId(DATA_TEST_ID)
+  const component = screen.getByRole('button')
 
   pressEnter(component)
 

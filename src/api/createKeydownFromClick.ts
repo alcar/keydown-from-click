@@ -1,4 +1,9 @@
-import { AbstractView } from 'react'
+import {
+  AbstractView,
+  KeyboardEvent,
+  KeyboardEventHandler,
+  MouseEventHandler,
+} from 'react'
 import { Options } from '../typings'
 import { combineKeysWithModifiers, shouldTriggerHandler } from '../utils/event'
 
@@ -7,10 +12,12 @@ import { combineKeysWithModifiers, shouldTriggerHandler } from '../utils/event'
  */
 const BROWSER_TOP_BAR_HEIGHT_ESTIMATE = 80
 
-export const createKeydownFromClick = <T extends HTMLElement = HTMLElement>(
-  clickHandler: React.MouseEventHandler<T>,
+export const createKeydownFromClick = <
+  TElement extends HTMLElement = HTMLElement,
+>(
+  clickHandler: MouseEventHandler<TElement>,
   options: Options = {},
-): React.KeyboardEventHandler<T> => {
+): KeyboardEventHandler<TElement> => {
   const {
     keys: optionsKeys,
     modifiers: globalModifiers = {},
@@ -23,7 +30,7 @@ export const createKeydownFromClick = <T extends HTMLElement = HTMLElement>(
 
   const keyModifierCombos = combineKeysWithModifiers(keys, globalModifiers)
 
-  return (event: React.KeyboardEvent<T>): void => {
+  return (event: KeyboardEvent<TElement>): void => {
     if (shouldTriggerHandler(keyModifierCombos, event)) {
       const element = event.currentTarget.getBoundingClientRect()
 

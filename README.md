@@ -20,7 +20,9 @@ Quoting eslint-plugin-jsx-a11y's [click-events-have-key-events rule](https://git
 
 > Coding for the keyboard is important for users with physical disabilities who cannot use a mouse, AT compatibility, and screenreader users.
 
-Therefore, when creating a clickable, non-interactive element in React, we should also **"make all functionality available from a keyboard"** ([WCAG 2.1, guideline 2.1](https://www.w3.org/TR/WCAG21/#keyboard-accessible)), i.e., pass it at least one keyboard event handler. Oftentimes, however, the keyboard event handler should just replicate the click handler's actions — similar to how `<button>` elements behave.
+When creating interactive React elements, **using native interactive HTML elements should always be the first choice**.
+
+In the rare cases in which we need to use a non-interactive HTML element to create an interactive component in React, we should also **"make all functionality available from a keyboard"** ([WCAG 2.1, guideline 2.1](https://www.w3.org/TR/WCAG21/#keyboard-accessible)), i.e., pass it at least one keyboard event handler. Oftentimes, however, the keyboard event handler should just replicate the click handler's actions — similar to how `<button>` elements behave.
 
 This package aims to provide a simple way to do that.
 

@@ -1,3 +1,5 @@
+import { KeyboardEventHandler, MouseEventHandler } from 'react'
+
 export type Modifiers = {
   altKey?: boolean
   ctrlKey?: boolean
@@ -17,6 +19,14 @@ export type HookOptions = {
   extraDependencies?: Array<unknown>
 }
 
-export { createKeydownFromClick } from './api/createKeydownFromClick'
+export const createKeydownFromClick: <
+  TElement extends HTMLElement = HTMLElement,
+>(
+  clickHandler: MouseEventHandler<TElement>,
+  options: Options = {},
+) => KeyboardEventHandler<TElement>
 
-export { useKeydownFromClick } from './api/useKeydownFromClick'
+export const useKeydownFromClick: <TElement extends HTMLElement = HTMLElement>(
+  clickHandler: MouseEventHandler<TElement>,
+  options: Options & HookOptions = {},
+) => KeyboardEventHandler<TElement>

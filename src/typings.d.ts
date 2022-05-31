@@ -23,10 +23,10 @@ export const createKeydownFromClick: <
   TElement extends HTMLElement = HTMLElement,
 >(
   clickHandler: MouseEventHandler<TElement>,
-  options: Options = {},
+  options?: Options,
 ) => KeyboardEventHandler<TElement>
 
 export const useKeydownFromClick: <TElement extends HTMLElement = HTMLElement>(
   clickHandler: MouseEventHandler<TElement>,
-  options: Options & HookOptions = {},
+  options?: Options & HookOptions,
 ) => KeyboardEventHandler<TElement>

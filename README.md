@@ -4,6 +4,10 @@
 
 **Generate React keydown handlers by replicating click ones.**
 
+## Disclaimer
+
+This project is no longer being maintained.
+
 ## Sections
 
 - [Motivation](#motivation)

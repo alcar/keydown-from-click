@@ -13,7 +13,6 @@ This project is no longer being maintained.
 - [Motivation](#motivation)
 - [Installation](#installation)
 - [API](#api)
-- [Example](#example)
 - [Changelog](#changelog)
 - [Development](#development)
 - [License](#license)
@@ -156,10 +155,6 @@ _All options from `createKeydownFromClick` are also available to `useKeydownFrom
   ```
 
   Using this option **won't** override the default configuration; the values of `extraDependencies` will be added to the end of the dependencies array.
-
-## Example
-
-[CodeSandbox](https://codesandbox.io/s/keydown-from-click-example-rwsxk)
 
 ## Changelog
 
